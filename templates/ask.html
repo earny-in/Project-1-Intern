@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}Ask Question - Quora Clone{% endblock %}
+
+{% block content %}
+<div class="form-card">
+    <h2 style="margin-bottom: 20px; border-bottom: 1px solid var(--border-color); padding-bottom: 10px;">Ask a Question</h2>
+    <form method="POST">
+        <div class="form-group">
+            <label for="title">Question Title</label>
+            <input type="text" id="title" name="title" required placeholder='Start your question with "What", "How", "Why", etc.'>
+        </div>
+        <div class="form-group">
+            <label for="body">Question Details (Optional)</label>
+            <textarea id="body" name="body" rows="6" placeholder="Provide more context for your question..."></textarea>
+        </div>
+        <div style="display: flex; justify-content: flex-end; gap: 10px;">
+            <a href="{{ url_for('feed') }}" style="padding: 10px 20px; text-decoration: none; color: var(--text-secondary);">Cancel</a>
+            <button type="submit" class="btn-primary" style="width: auto;">Add Question</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

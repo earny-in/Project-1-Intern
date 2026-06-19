@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ question.title }} - Quora Clone{% endblock %}
+
+{% block content %}
+<div class="card" style="margin-bottom: 20px;">
+    <div class="card-meta">
+        Asked by <strong>{{ question.username }}</strong> on {{ question.created_at.strftime('%b %d, %Y') }}
+    </div>
+    <h1 style="font-size: 24px; margin-bottom: 15px;">{{ question.title }}</h1>
+    <div class="card-content">
+        {{ question.body }}
+    </div>
+</div>
+
+<div class="card">
+    <h3 style="margin-bottom: 15px; border-bottom: 1px solid var(--border-color); padding-bottom: 5px;">
+        {{ answers|length }} Answer{% if answers|length != 1 %}s{% endif %}
+    </h3>
+
+    {% if not answers %}
+        <p style="color: var(--text-secondary); font-style: italic;">No answers yet. Share your knowledge!</p>
+    {% endif %}
+
+    {% for answer in answers %}
+        <div class="answer-item">
+            <div class="card-meta">
+                Answered by <strong>{{ answer.username }}</strong> on {{ answer.created_at.strftime('%b %d, %Y') }}
+            </div>
+            <div class="card-content">
+                {{ answer.body }}
+            </div>
+        </div>
+    {% endfor %}
+
+    <div class="form-card" style="margin-top: 30px; padding: 20px;">
+        <h4 style="margin-bottom: 15px;">Your Answer</h4>
+        <form method="POST">
+            <div class="form-group">
+                <textarea name="body" rows="5" required placeholder="Write your answer here..."></textarea>
+            </div>
+            <button type="submit" class="btn-primary" style="width: auto;">Post Answer</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

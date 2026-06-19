@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}Feed - Quora Clone{% endblock %}
+
+{% block content %}
+<div class="container">
+    {% if not questions %}
+        <div class="card" style="text-align: center;">
+            <h3>No questions yet. Be the first to ask!</h3>
+            <p style="margin-top: 10px;">
+                <a href="{{ url_for('ask_question') }}" class="btn-ask" style="display: inline-block;">Ask Question</a>
+            </p>
+        </div>
+    {% endif %}
+
+    {% for question in questions %}
+        <div class="card">
+            <div class="card-meta">
+                Asked by <strong>{{ question.username }}</strong> on {{ question.created_at.strftime('%b %d, %Y') }}
+            </div>
+            <h2><a href="{{ url_for('view_question', question_id=question.id) }}">{{ question.title }}</a></h2>
+            <div class="card-content">
+                {{ question.body[:200] }}{% if question.body|length > 200 %}...{% endif %}
+            </div>
+            <div style="margin-top: 15px;">
+                <a href="{{ url_for('view_question', question_id=question.id) }}" style="color: var(--link-color); text-decoration: none; font-weight: 500;">
+                    View Answers
+                </a>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}

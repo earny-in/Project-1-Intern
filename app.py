@@ -117,7 +117,7 @@ def ask_question():
                        (session['user_id'], title, body))
         mysql.connection.commit()
         cursor.close()
-        flash('Question posted successfully!', 'success')
+        flash('Question Posted Successfully!', 'success')
         return redirect(url_for('feed'))
         
     return render_template('ask.html')

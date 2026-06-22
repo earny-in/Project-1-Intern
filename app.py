@@ -28,11 +28,11 @@ def login_required(f):
         return f(*args, **kwargs)
     return decorated_function
 
-# Routes
+# Home Page go to feed
 @app.route('/')
 def index():
     return redirect(url_for('feed'))
-
+# Registration
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
     if request.method == 'POST':
@@ -79,7 +79,7 @@ def signup():
             cursor.close()
             
     return render_template('signup.html')
-
+# Login pg
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
@@ -100,13 +100,13 @@ def login():
             flash('Invalid email or password.', 'error')
             
     return render_template('login.html')
-
+# logout pg
 @app.route('/logout')
 def logout():
     session.clear()
     flash('You have been logged out.', 'success')
     return redirect(url_for('login'))
-
+# Question feed pg
 @app.route('/feed')
 @login_required
 def feed():
@@ -120,7 +120,7 @@ def feed():
     questions = cursor.fetchall()
     cursor.close()
     return render_template('feed.html', questions=questions)
-
+# Aask question here
 @app.route('/ask', methods=['GET', 'POST'])
 @login_required
 def ask_question():
@@ -141,7 +141,7 @@ def ask_question():
         return redirect(url_for('feed'))
         
     return render_template('ask.html')
-
+# View question and answers
 @app.route('/question/<int:question_id>', methods=['GET', 'POST'])
 @login_required
 def view_question(question_id):
@@ -184,6 +184,19 @@ def view_question(question_id):
     
     cursor.close()
     return render_template('question.html', question=question, answers=answers)
+    cursor.close()
+    
+# About Page
+@app.route('/about')
+def about():
+    return "<h1>ASKHUB About Page</h1><p>This project was developed during Earny Internship.</p>"
+
+
+# Contact Page
+@app.route('/contact')
+def contact():
+    return "<h1>Contact Us</h1><p>Email: @gmail.com</p>"
+
 
 if __name__ == '__main__':
     app.run(debug=True)

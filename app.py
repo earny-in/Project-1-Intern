@@ -18,7 +18,7 @@ app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
 mysql = MySQL(app)
 bcrypt = Bcrypt(app)
 
-# Login Required Decorator
+# Login required Decorator
 def login_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):

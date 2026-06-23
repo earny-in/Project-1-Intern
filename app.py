@@ -8,7 +8,7 @@ app.secret_key = 'super_secret_key'
 # MySQL Configuration
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = 'quoramysql'  
+app.config['MYSQL_PASSWORD'] = 'rajanmysql'  
 app.config['MYSQL_DB'] = 'quora_clone'
 app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
 
@@ -17,7 +17,7 @@ mysql = MySQL(app)
 # Login Required Decorator
 def login_required(f):
     @wraps(f)
-    def decorated_function(*args, **kwargs):
+    def decorated_function(*args, **kwargs):  #nromal value , named value
         if 'user_id' not in session:
             flash('Please log in to access this page.', 'error')
             return redirect(url_for('login'))
@@ -25,7 +25,7 @@ def login_required(f):
     return decorated_function
 
 # Home Page go to feed
-@app.route('/')
+@app.route('/')  
 def index():
     return redirect(url_for('feed'))
 # Create a new user account and save it in database
@@ -45,20 +45,24 @@ def signup():
             flash('Username must be at least 2 characters.', 'error')
             return redirect(url_for('signup'))    
 
-        if len(password) < 8:
-            flash('Password must be at least 8 characters.', 'error')
+        if len(password) < 6:
+            flash('Password must be at least 6 characters.', 'error')
             return redirect(url_for('signup'))    
         
         # Check if passwords match
         if password != confirm_password:
             flash('Passwords do not match.', 'error')
             return redirect(url_for('signup'))
+        
+        if not email.endswith("@gmail.com"):
+            flash('Please enter a valid Gmail address.', 'error')     
+            return redirect(url_for('signup'))
             
 
         cursor = mysql.connection.cursor()
         try:
              query = """
-             INSERT INTO users (username, email, password_hash)
+             INSERT INTO users (username, email, password)
              VALUES (%s, %s, %s)
              """
              cursor.execute(query, (username, email, password))
@@ -67,8 +71,8 @@ def signup():
              flash('Account created successfully! Please login.', 'success')
              return redirect(url_for('login'))
         
-        except Exception as e:
-            flash(f'Error: {e}', 'error')
+        except Exception as error:
+            flash(f'Error: {error}', 'error')
         finally:
             cursor.close()
             
@@ -85,10 +89,10 @@ def login():
         user = cursor.fetchone()
         cursor.close()
         
-        if user and user['password_hash'] == password:
+        if user and user['password'] == password:
             session['user_id'] = user['id']
             session['username'] = user['username']
-            flash(f'Welcome back, {user["username"]}!', 'success')
+            flash(f'Welcome back, {user["username"]} bro !', 'success')
             return redirect(url_for('feed'))
         else:
             flash('Invalid email or password.', 'error')

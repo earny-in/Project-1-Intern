@@ -1,8 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for, session, flash
 from flask_mysqldb import MySQL
-from flask_bcrypt import Bcrypt
-import MySQLdb.cursors
-import re
 from functools import wraps
 
 app = Flask(__name__)
@@ -16,7 +13,6 @@ app.config['MYSQL_DB'] = 'quora_clone'
 app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
 
 mysql = MySQL(app)
-bcrypt = Bcrypt(app)
 
 # Login Required Decorator
 def login_required(f):
@@ -32,7 +28,7 @@ def login_required(f):
 @app.route('/')
 def index():
     return redirect(url_for('feed'))
-# Registration
+# Create a new user account and save it in database
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
     if request.method == 'POST':
@@ -45,35 +41,33 @@ def signup():
             flash('Please fill out all fields.', 'error')
             return redirect(url_for('signup'))
 
-        if len(username) < 3:
-            flash('Username must be at least 3 characters.', 'error')
+        if len(username) < 2:
+            flash('Username must be at least 2 characters.', 'error')
             return redirect(url_for('signup'))    
 
-        if len(password) < 6:
-            flash('Password must be at least 6 characters.', 'error')
+        if len(password) < 8:
+            flash('Password must be at least 8 characters.', 'error')
             return redirect(url_for('signup'))    
         
         # Check if passwords match
         if password != confirm_password:
             flash('Passwords do not match.', 'error')
             return redirect(url_for('signup'))
-
-# Check password length
-        if len(password) < 6:
-            flash('Password must be at least 6 characters.', 'error')
-            return redirect(url_for('signup'))
             
 
         cursor = mysql.connection.cursor()
         try:
-            cursor.execute(
-    "INSERT INTO users (username, email, password_hash) VALUES (%s, %s, %s)",
-    (username, email, password)
-)
-            mysql.connection.commit()
-            flash('Account created successfully! Please login.', 'success')
-            return redirect(url_for('login'))
-        except MySQLdb.Error as e:
+             query = """
+             INSERT INTO users (username, email, password_hash)
+             VALUES (%s, %s, %s)
+             """
+             cursor.execute(query, (username, email, password))
+
+             mysql.connection.commit()
+             flash('Account created successfully! Please login.', 'success')
+             return redirect(url_for('login'))
+        
+        except Exception as e:
             flash(f'Error: {e}', 'error')
         finally:
             cursor.close()
@@ -184,18 +178,21 @@ def view_question(question_id):
     
     cursor.close()
     return render_template('question.html', question=question, answers=answers)
-    cursor.close()
     
 # About Page
 @app.route('/about')
 def about():
-    return "<h1>ASKHUB About Page</h1><p>This project was developed during Earny Internship.</p>"
+    return "<h1>TaskFlow Manager</h1><p>Project and Task Management Platform.</p>"
 
 
 # Contact Page
 @app.route('/contact')
 def contact():
-    return "<h1>Contact Us</h1><p>Email: @gmail.com</p>"
+    return """
+<h1>Contact TaskFlow</h1>
+<p>Email: rajan12maurya2008@gmail.com</p>
+<p>Developed during Earny Internship Program.</p>
+"""
 
 
 if __name__ == '__main__':

@@ -1,127 +1,97 @@
-﻿# ASKHUB
+﻿# TaskFlow Manager
 
-## About the Project
-
-ASKHUB is a simple question and answer platform inspired by Quora. It allows users to create an account, log in, ask questions, browse questions posted by other users, and share answers.
-
-The project was developed as part of the Earny.in Internship Program to learn full-stack web development using Flask and MySQL.
-
-The main goal of this project is to understand how frontend, backend, and database systems work together in a real-world application.
+TaskFlow Manager is a simple web-based platform developed during the Earny Internship Program. The purpose of this project is to help users manage tasks, collaborate with team members, and track work progress through a clean and user-friendly interface.
 
 ---
 
-## Technologies Used
+## Problem Statement
 
-### Frontend
+Many students and small teams struggle to organize their daily tasks and project activities. Existing tools are often complex for beginners. This project aims to provide a simple solution for task management and collaboration.
 
-* HTML
-* CSS
+---
 
-### Backend
+## Project Objectives
 
-* Python
-* Flask
-
-### Database
-
-* MySQL
-
-### Development Tools
-
-* Git
-* GitHub
-* Visual Studio Code
+- Provide secure user registration and login.
+- Allow users to create and manage tasks.
+- Enable collaboration among team members.
+- Maintain task-related information in a structured database.
+- Build a beginner-friendly project using Flask and MySQL.
 
 ---
 
 ## Features
 
-* User Registration
-* User Login and Logout
-* Ask Questions
-* View Questions Feed
-* Submit Answers
-* Session Management
-* Flash Messages
-* Database Connectivity using MySQL
-* Responsive Interface
+- User Registration
+- User Login & Logout
+- Session Management
+- Create Tasks
+- View Task Feed
+- Task Discussion / Updates
+- Database Integration
+- Responsive User Interface
 
 ---
 
-## Software Requirements
+## Technology Stack
 
-Before running the project, install the following software:
+### Frontend
+- HTML
+- CSS
 
-* Python 3.x
-* MySQL Server
-* MySQL Workbench
-* Visual Studio Code
+### Backend
+- Python
+- Flask
+
+### Database
+- MySQL
+
+### Tools
+- Git
+- GitHub
+- VS Code
 
 ---
 
-## Required Packages
+## System Architecture
 
-Install the required Python packages:
+User Interface (HTML/CSS)
+        ↓
+Flask Application (Python)
+        ↓
+MySQL Database
+
+The frontend collects user input, Flask processes requests, and MySQL stores the application data.
+
+---
+
+## Installation Guide
+
+Clone Repository
 
 ```bash
-pip install flask
-pip install flask-mysqldb
-pip install flask-bcrypt
-pip install mysqlclient
+git clone <repository-url>
 ```
 
-Or install all packages together:
+### Install Dependencies
 
 ```bash
-pip install flask flask-mysqldb flask-bcrypt mysqlclient
+pip install -r requirement.txt
 ```
 
----
+### Configure Database
 
-## Database Setup
+1. Create MySQL database.
+2. Import schema.sql.
+3. Update database credentials inside app.py.
 
-Create a database named:
-
-```sql
-CREATE DATABASE quora_clone;
-```
-
-Run the provided `schema.sql` file to create all required tables.
-
----
-
-## Project Structure
-
-```text
-ASKHUB/
-│
-├── app.py
-├── schema.sql
-├── README.md
-│
-├── static/
-│   └── style.css
-│
-└── templates/
-    ├── base.html
-    ├── login.html
-    ├── signup.html
-    ├── feed.html
-    ├── ask.html
-    └── question.html
-```
-
----
-
-## Running the Project
-
-Run the application using:
+### Run Application
 
 ```bash
 python app.py
 ```
 
-Open the browser and visit:
+Application will start on:
 
 ```text
 http://127.0.0.1:5000
@@ -129,98 +99,69 @@ http://127.0.0.1:5000
 
 ---
 
-## Team Contributions
+## Here simple steps again
+
+1. Download or clone the project from GitHub.
+
+2. Install all required Python packages using:
+   pip install -r requirement.txt
+
+3. Create the MySQL database and import schema.sql.
+
+4. Update your database username and password inside app.py.
+
+5. Start the application using:
+   python app.py
+
+6. Open http://127.0.0.1:5000 in your browser.
+
+## Future Scope
+
+- Task Priority Levels
+- Team Dashboard
+- Email Notifications
+- Profile Management
+- Search and Filter Tasks
+- Project Analytics
+
+---
+
+## Contributors
 
 ### Rajan Maurya
+- Backend Development
+- Documentation
 
-**Project Coordinator & Repository Manager**
+### Om Gupta
+- Authentication Module
+- Validation Improvements
 
-Responsibilities:
+### Nyasha Gupta
+- Feature Development
+- Code Review
 
-* Coordinated project development
-* Managed GitHub repository and branches
-* Reviewed and integrated team changes
-* Maintained project documentation
-* Tested overall project functionality
-* Organized project structure
+### Ritesh Singh
+- Database Support
+- Testing
 
----
-
-### Om
-**Authentication Module**
-
-Responsibilities:
-
-* User Registration System
-* User Login System
-* Session Management
-* Input Validation
-* Authentication Improvements
-
-Files Worked On:
-
-* login.html
-* signup.html
-* app.py
+### Sanjana Kumari
+- UI Improvements
+- Documentation Support
 
 ---
 
-### Nyashaa 
-**Question Management Module**
+## Learning Outcomes
 
-Responsibilities:
+Through this project, the team gained practical experience in:
 
-* Ask Question Feature
-* Question Feed Display
-* Question Validation
-* Feed Management
-* Question System Improvements
-
-Files Worked On:
-
-* ask.html
-* feed.html
-* app.py
+- Flask Development
+- MySQL Integration
+- Git and GitHub Workflow
+- Team Collaboration
+- Software Documentation
 
 ---
 
-### Retish
-**Answer Management Module**
+## Conclusion
 
-Responsibilities:
-
-* Answer Submission Feature
-* Answer Display System
-* Answer Validation
-* Question Detail Page Management
-
-Files Worked On:
-
-* question.html
-* app.py
-
----
-
-### Sanjana
-**User Interface & Styling Module**
-
-Responsibilities:
-
-* Frontend Design Improvements
-* CSS Styling
-* Layout Management
-* Navigation Enhancements
-* User Experience Improvements
-
-Files Worked On:
-
-* style.css
-* base.html
-* templates files
-
-
----
-
-## Internship Project
-
-ASKHUB was developed as part of the Earny.in Internship Program to gain practical experience in web development, database management, GitHub collaboration, and software project workflow.
+TaskFlow Manager demonstrates the implementation of a simple project management platform using Flask and MySQL. The project focuses on clean functionality, collaboration, and maintainable code structure while providing a foundation for future enhancements.

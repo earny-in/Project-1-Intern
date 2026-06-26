@@ -128,23 +128,23 @@ http://127.0.0.1:5000
 
 ## Contributors
 
-### Rajan Maurya
+### [@rajanmaurya12012008](https://github.com/rajanmaurya12012008)
 - Backend Development
 - Documentation
 
-### Om Gupta
+### [@imomrg](https://github.com/imomrg)
 - Authentication Module
 - Validation Improvements
 
-### Nyasha Gupta
+### [@nyashagupta-24](https://github.com/nyashagupta-24)
 - Feature Development
 - Code Review
 
-### Ritesh Singh
+### [@rkriteshsingh1236-del](https://github.com/rkriteshsingh1236-del)
 - Database Support
 - Testing
 
-### Sanjana Kumari
+### [@sanjanakum552-prog](https://github.com/sanjanakum552-prog)
 - UI Improvements
 - Documentation Support
 

@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Quora Clone{% endblock %}</title>
+    <title>{% block title %}TaskFlow Manager{% endblock %}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
     <nav class="navbar">
         <div class="nav-content">
-            <a href="{{ url_for('feed') }}" class="logo">Quora</a>
+            <a href="{{ url_for('feed') }}" class="logo">TaskFlow</a>
             <div class="nav-links">
                 {% if session.get('user_id') %}
                     <span>Hello, {{ session.get('username') }}</span>

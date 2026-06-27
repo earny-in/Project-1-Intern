@@ -1,14 +1,16 @@
+import os
 from flask import Flask, render_template, request, redirect, url_for, session, flash
 from flask_mysqldb import MySQL
 from functools import wraps
 
+
 app = Flask(__name__)
-app.secret_key = 'super_secret_key'
+app.secret_key = os.environ.get('SECRET_KEY', 'super_secret_key')
 
 # MySQL Configuration
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = 'rajanmysql'  
+app.config['MYSQL_PASSWORD'] = 'quoramysql'  
 app.config['MYSQL_DB'] = 'quora_clone'
 app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
 
